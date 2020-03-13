@@ -33,7 +33,7 @@ app.get('/all', (req, res) => {
 
 app.post('/addEntry', (req, res) => {
     let data = req.body;
-    projectData['answer'] = data.answer;
+    console.log(data);
 });
 
 

@@ -33,20 +33,22 @@ const postData = async (url = '', data = {}) => {
     }
 }
 
-postData('/addEntry', { answer: 42 });
 
 document.getElementById('generate').addEventListener('click', performAction);
 
 function performAction(e) {
     const zip = document.getElementById('zip').value;
-    getWeatherData(baseUrl, zip, apiKey);
+    getWeatherData(baseUrl, zip, apiKey)
+        .then(function (data) {
+            let temp = data.main.temp;
+            postData('/addEntry', { temp: temp, content: content, date: getDate() });
+        })
 }
 
 const getWeatherData = async (baseUrl, zip, apiKey) => {
     const res = await fetch(baseUrl + zip + apiKey);
     try {
         const data = await res.json();
-        console.log(data)
         return data;
     }
     catch (error) {
