@@ -1,7 +1,4 @@
 /* Global Variables */
-const content = document.getElementById('feelings').value;
-const zip = document.getElementById('zip').value;
-
 const apiKey = '&appid=a5a4bf35aa8908ea93d343892af46b30';
 const baseUrl = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 
@@ -33,16 +30,32 @@ const postData = async (url = '', data = {}) => {
     }
 }
 
-
 document.getElementById('generate').addEventListener('click', performAction);
 
 function performAction(e) {
+    const content = document.getElementById('feelings').value;
     const zip = document.getElementById('zip').value;
     getWeatherData(baseUrl, zip, apiKey)
         .then(function (data) {
             let temp = data.main.temp;
             postData('/addEntry', { temp: temp, content: content, date: getDate() });
         })
+        .then(
+            updateUI()
+        )
+}
+
+const updateUI = async () => {
+    const req = await fetch('/all');
+    try {
+        const allData = await req.json();
+        document.getElementById('temp').innerHTML = allData.temp;
+        document.getElementById('content').innerHTML = allData.content;
+        document.getElementById('date').innerHTML = allData.date;
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
 
 const getWeatherData = async (baseUrl, zip, apiKey) => {
