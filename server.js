@@ -36,7 +36,6 @@ app.post('/addEntry', (req, res) => {
     projectData['temp'] = data.temp;
     projectData['content'] = data.content;
     projectData['date'] = data.date;
-    console.log(data);
 });
 
 
