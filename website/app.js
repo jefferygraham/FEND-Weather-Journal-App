@@ -9,6 +9,17 @@ const getDate = () => {
     return newDate;
 }
 
+const getWeatherData = async (baseUrl, zip, apiKey) => {
+    const res = await fetch(baseUrl + zip + apiKey);
+    try {
+        const data = await res.json();
+        return data;
+    }
+    catch (error) {
+        console.log("error", error);
+    }
+}
+
 const postData = async (url = '', data = {}) => {
     console.log(data);
     const response = await fetch(url, {
@@ -30,6 +41,19 @@ const postData = async (url = '', data = {}) => {
     }
 }
 
+const updateUI = async () => {
+    const req = await fetch('/all');
+    try {
+        const allData = await req.json();
+        document.getElementById('temp').innerHTML = allData.temp;
+        document.getElementById('content').innerHTML = allData.content;
+        document.getElementById('date').innerHTML = allData.date;
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
 document.getElementById('generate').addEventListener('click', performAction);
 
 function performAction(e) {
@@ -45,29 +69,7 @@ function performAction(e) {
         )
 }
 
-const updateUI = async () => {
-    const req = await fetch('/all');
-    try {
-        const allData = await req.json();
-        document.getElementById('temp').innerHTML = allData.temp;
-        document.getElementById('content').innerHTML = allData.content;
-        document.getElementById('date').innerHTML = allData.date;
-    }
-    catch (error) {
-        console.log(error)
-    }
-}
 
-const getWeatherData = async (baseUrl, zip, apiKey) => {
-    const res = await fetch(baseUrl + zip + apiKey);
-    try {
-        const data = await res.json();
-        return data;
-    }
-    catch (error) {
-        console.log("error", error);
-    }
-}
 
 
 
