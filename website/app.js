@@ -1,5 +1,5 @@
 /* Global Variables */
-const apiKey = '&appid=a5a4bf35aa8908ea93d343892af46b30';
+const apiKey = '&units=imperial&appid=a5a4bf35aa8908ea93d343892af46b30';
 const baseUrl = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 
 // Create a new date instance dynamically with JS
@@ -21,7 +21,6 @@ const getWeatherData = async (baseUrl, zip, apiKey) => {
 }
 
 const postData = async (url = '', data = {}) => {
-    console.log(data);
     const response = await fetch(url, {
         method: 'POST',
         credentials: 'same-origin',
@@ -34,7 +33,6 @@ const postData = async (url = '', data = {}) => {
 
     try {
         const newData = await response.json();
-        console.log(newData);
         return newData;
     } catch (error) {
         console.log("error", error);
@@ -42,9 +40,10 @@ const postData = async (url = '', data = {}) => {
 }
 
 const updateUI = async () => {
-    const req = await fetch('/all');
+    const req = await fetch('/all')
     try {
         const allData = await req.json();
+        console.log('allData', allData);
         document.getElementById('temp').innerHTML = allData.temp;
         document.getElementById('content').innerHTML = allData.content;
         document.getElementById('date').innerHTML = allData.date;

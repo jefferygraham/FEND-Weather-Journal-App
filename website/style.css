@@ -17,11 +17,15 @@ body{
 }
 
 .holder{
-
+    background-color: red;
 }
 
 .entry{
     background: rgba(59, 74, 107, .4);
+}
+
+.zip, .flex {
+    flex-direction: column;
 }
 
 #entryHolder{
@@ -65,8 +69,6 @@ input{
 }
 
 button{
-    width: 400px;
-    height: 100px;
     background: #3b4a6b;
     color: #f0d43a;
     font-size: 26px;
