@@ -43,7 +43,6 @@ const updateUI = async () => {
     try {
         const req = await fetch('/all');
         const allData = await req.json();
-        console.log(allData);
         document.getElementById('temp').innerHTML = allData.temp;
         document.getElementById('content').innerHTML = allData.content;
         document.getElementById('date').innerHTML = allData.date;
@@ -66,8 +65,8 @@ function performAction(e) {
             return entry;
         })
         .then(
-            function (data) {
-                updateUI(data);
+            function () {
+                updateUI();
             })
 }
 
