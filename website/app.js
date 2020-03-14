@@ -40,10 +40,10 @@ const postData = async (url = '', data = {}) => {
 }
 
 const updateUI = async () => {
-    const req = await fetch('/all')
     try {
+        const req = await fetch('/all');
         const allData = await req.json();
-        console.log('allData', allData);
+        console.log(allData);
         document.getElementById('temp').innerHTML = allData.temp;
         document.getElementById('content').innerHTML = allData.content;
         document.getElementById('date').innerHTML = allData.date;
@@ -61,11 +61,14 @@ function performAction(e) {
     getWeatherData(baseUrl, zip, apiKey)
         .then(function (data) {
             let temp = data.main.temp;
-            postData('/addEntry', { temp: temp, content: content, date: getDate() });
+            let entry = { temp: temp, content: content, date: getDate() };
+            postData('/addEntry', entry);
+            return entry;
         })
         .then(
-            updateUI()
-        )
+            function (data) {
+                updateUI(data);
+            })
 }
 
 
