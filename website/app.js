@@ -46,9 +46,9 @@ const updateUI = async () => {
     try {
         const req = await fetch('/all');
         const allData = await req.json();
-        document.getElementById('date').innerHTML = `On ${allData.date}:`;
-        document.getElementById('temp').innerHTML = 'It was ' + allData.temp + '\u00B0' + 'F.';
-        document.getElementById('content').innerHTML = `You felt: ${allData.content}`;
+        document.getElementById('date').innerHTML = `On ${allData[0].date}:`;
+        document.getElementById('temp').innerHTML = 'It was ' + allData[0].temp + '\u00B0' + 'F.';
+        document.getElementById('content').innerHTML = `You felt: ${allData[0].content}`;
     }
     catch (error) {
         console.log(error)
