@@ -6,7 +6,7 @@
         grid-template-areas: "header header"
                              "zip entry"
                              "feelings entry";
-        grid-template-rows: 1fr 1fr 2fr;
+        grid-template-rows: 1fr 100px 2fr;
         grid-template-columns: 3fr 2fr;
     }
 

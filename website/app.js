@@ -43,7 +43,7 @@ const updateUI = async () => {
     try {
         const req = await fetch('/all');
         const allData = await req.json();
-        document.getElementById('temp').innerHTML = allData.temp;
+        document.getElementById('temp').innerHTML = allData.temp + '\u00B0';
         document.getElementById('content').innerHTML = allData.content;
         document.getElementById('date').innerHTML = allData.date;
     }
