@@ -58,16 +58,14 @@ function performAction(e) {
     const content = document.getElementById('feelings').value;
     const zip = document.getElementById('zip').value;
     getWeatherData(baseUrl, zip, apiKey)
-        .then(function (data) {
+        .then((data) => {
             let temp = data.main.temp;
             let entry = { temp: temp, content: content, date: getDate() };
             postData('/addEntry', entry);
-            return entry;
         })
-        .then(
-            function () {
-                updateUI();
-            })
+        .then(() => {
+            updateUI();
+        })
 }
 
 
